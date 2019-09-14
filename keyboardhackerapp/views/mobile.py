@@ -18,7 +18,7 @@ def audio_upload(req: HttpRequest) -> HttpResponse:
         return HttpResponse('No recording sessions', status=400)
 
     last = RecordEvent.objects.latest('audio_start_time')
-    guid = last.uid
+    guid = last.guid
     last.active = False
     last.save()
 

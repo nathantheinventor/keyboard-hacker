@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'keyboardhackerapp.apps.KeyboardhackerappConfig',
+    'sslserver',
 ]
 
 MIDDLEWARE = [

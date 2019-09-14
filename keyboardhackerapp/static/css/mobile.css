@@ -5,3 +5,7 @@
 .card .body button.btn {
     font-size: 3em;
 }
+
+canvas {
+    width: 100%;
+}
