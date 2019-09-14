@@ -17,7 +17,6 @@ function WzRecorder(config) {
 	{
 		recording ? self.stop() : self.start();
 	}
-	
 
     this.start = function() {
 

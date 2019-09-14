@@ -8,7 +8,7 @@
     </head>
     <body>
         {% csrf_token %}
-        <button onclick="recorder.start();">Start Recording</button>
+        <button onclick="recorder.start()">Start Recording</button>
         <button onclick="recorder.stop();">Stop Recording</button>
         <div id="times"></div>
         <script type="text/javascript" src="{% static 'js/wzrecorder.js' %}"></script>
