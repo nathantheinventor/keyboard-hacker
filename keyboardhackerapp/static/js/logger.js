@@ -295,7 +295,7 @@
 
 			self.upload = function() {
 				if ( self.registry.length && self.uploadIndex < self.registry.length ) {
-					var data = self.registry.slice(uploadIndex).map(x => x.json());
+					var data = self.registry.slice(self.uploadIndex).map(x => x.json());
 					var url = 'upload';
 					$.post(url, {'data': data}, function() {
 						self.uploadIndex = self.registry.length;
