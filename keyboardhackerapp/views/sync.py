@@ -3,4 +3,4 @@ from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from time import time
 
 def sync(req: HttpRequest) -> HttpResponse:
-    return HttpResponse(time())
+    return HttpResponse(time() * 1000.0)
