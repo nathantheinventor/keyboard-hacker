@@ -1,9 +1,17 @@
+{% load static %}
+
 <!doctype HTML>
 <html>
     <head>
         <title>Keyboard Hacker</title>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
     </head>
     <body>
-        <button onclick="start_recording();">Start Recording</button>
+        {% csrf_token %}
+        <button onclick="recorder.start();">Start Recording</button>
+        <button onclick="recorder.stop();">Stop Recording</button>
+        <div id="times"></div>
+        <script type="text/javascript" src="{% static 'js/wzrecorder.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/mobile.js' %}"></script>
     </body>
 </html>
