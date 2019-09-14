@@ -99,14 +99,14 @@ function WzRecorder(config) {
 
 
     function onMicrophoneCaptured(microphone) {
+        audioInput = audioCtx.createMediaStreamSource(microphone);
 
 		if (config.visualizer)
-			visualize(microphone);
+			visualize(audioInput);
 		
 		// save the stream so we can disconnect it when we're done
 		window.localStream = microphone;
 
-        audioInput = audioCtx.createMediaStreamSource(microphone);
         audioInput.connect(audioNode);
 
         audioNode.onaudioprocess = onAudioProcess;
@@ -138,13 +138,12 @@ function WzRecorder(config) {
     }
 
 	
-	function visualize(stream) {
+	function visualize(source) {
 		var canvas = config.visualizer.element;
 		if (!canvas)
 			return;
 			
 		var canvasCtx = canvas.getContext("2d");
-		var source = audioCtx.createMediaStreamSource(stream);
 
 		var analyser = audioCtx.createAnalyser();
 		analyser.fftSize = 2048;
