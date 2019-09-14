@@ -5,8 +5,8 @@ offset = get_server_offset().then(function(offset){
     onRecordingStart: data=> {
         // Notify the server
         $.post('/activate', {
-             csrfmiddlewaretoken: $("input:hidden").val(),
-            audio_start_time: new Date() * 1 + offset
+            csrfmiddlewaretoken: $("input:hidden").val(),
+            audio_start_time: Math.round(new Date() * 1 + offset)
 
         })
     },
