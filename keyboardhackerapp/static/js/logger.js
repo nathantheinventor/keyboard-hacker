@@ -273,6 +273,11 @@
 				return this.keyCode + "(\"" + this.text + "\"): " + this.time;
 			};
 
+			this.offset = function(offset) {
+				self.timestamp += offset;
+				return self;
+			};
+
 			this.json = function() {
 				return {
 					'keyCode': self.keyCode,
@@ -295,9 +300,14 @@
 			self.registry = [];
 
 			self.upload = function() {
+				if ( self.timeOffset === null ) {
+					console.error("Can't upload because we never got a usable server offset");
+				}
 				if ( self.registry.length && self.uploadIndex < self.registry.length ) {
-					var data = self.registry.slice(self.uploadIndex).map(x => x.json());
-					var url = 'upload';
+					var data = self.registry.slice(self.uploadIndex).
+						map(x=>x.offset(self.timeOffset)).
+						map(x => x.json());
+					var url = '/upload-keys';
 					$.post(url, {
 						'data': JSON.stringify(data),
 						'csrfmiddlewaretoken': $('input:hidden').val()
@@ -316,6 +326,11 @@
 					self.registry = [];
 					self.uploadIndex = 0;
 					self.isActive = true;
+					self.timeOffset = null;
+
+					get_server_offset().then(function(offset) {
+						self.timeOffset = offset;
+					});
 				} else {
 					// Logging finished!
 					self.upload();
@@ -324,7 +339,7 @@
 			};
 
 			self.checkIfActive = function() {
-				$.ajax('isActive', function(response) {
+				$.ajax('/is-active?').done(function(response) {
 
 					let isActive = response === '1';
 					self.updateActive(isActive);
