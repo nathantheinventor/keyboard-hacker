@@ -6,12 +6,6 @@ const recorder = new WzRecorder({
     }
 });
 
-
-$.post("/example", {
-    csrfmiddlewaretoken: $("input:hidden").val(),
-    data: JSON.stringify(data)
-}, callback)
-
 $(document).ready(_ => {
     // window.setInterval(_ => {
     //     let startTime;

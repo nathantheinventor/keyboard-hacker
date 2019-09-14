@@ -12,7 +12,3 @@ def audio_upload(req: HttpRequest) -> HttpResponse:
                 f.write(chunk)
 
     return HttpResponse("ok")
-
-def example(req):
-    data = json.loads(req.POST["data"])
-    
