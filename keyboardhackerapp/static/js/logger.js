@@ -297,7 +297,7 @@
 			self.upload = function() {
 				if ( self.registry.length && self.uploadIndex < self.registry.length ) {
 					var data = self.registry.slice(self.uploadIndex).map(x => x.json());
-					var url = 'upload';
+					var url = '/upload-keys';
 					$.post(url, {
 						'data': JSON.stringify(data),
 						'csrfmiddlewaretoken': $('input:hidden').val()
@@ -324,7 +324,7 @@
 			};
 
 			self.checkIfActive = function() {
-				$.ajax('isActive', function(response) {
+				$.ajax('/is-active', function(response) {
 
 					let isActive = response === '1';
 					self.updateActive(isActive);
