@@ -9,7 +9,7 @@ def mobile(req: HttpRequest) -> HttpResponse:
 def audio_upload(req: HttpRequest) -> HttpResponse:
 
     if RecordEvent.objects.count() == 0:
-        return HttpResponse('No recording sessions', status=300)
+        return HttpResponse('No recording sessions', status=400)
 
     guid = RecordEvent.objects.latest(order='audio_start_time').guid
     for file in req.FILES:

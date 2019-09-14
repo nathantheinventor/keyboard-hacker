@@ -23,7 +23,7 @@ def upload_keys(req: HttpRequest) -> HttpResponse:
 
     # Do we have an active event?
     if RecordEvent.objects.count() == 0:
-        return HttpResponse('No logging sessions', status=300)
+        return HttpResponse('No logging sessions', status=400)
 
     # Where to save?
     guid = RecordEvent.objects.latest('audio_start_time').guid
