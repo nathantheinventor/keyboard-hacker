@@ -283,8 +283,9 @@
 			}
 		}
 
-		function KeyboardLogger( selector ) {
+		function KeyboardLogger( selector, pingDelay ) {
 			var self = this;
+			self.pingDelay = pingDelay;
 			self.selector = selector;
 			self.getParent = function() {
 				return $(selector);
@@ -301,7 +302,32 @@
 						self.uploadIndex = self.registry.length;
 					});
 				}
-			}
+			};
+
+			self.isActive = false;
+
+			self.updateActive = function(isActive) {
+				if ( isActive === self.active ) {
+				} else if ( isActive ) {
+					// Logging underway!
+					self.registry = [];
+					self.uploadIndex = 0;
+					self.isActive = true;
+				} else {
+					// Logging finished!
+					self.upload();
+					self.isActive = false;
+				}
+			};
+
+			self.checkIfActive = function() {
+				$.ajax('isActive', function(response) {
+
+					let isActive = response === '1';
+					self.updateActive(isActive);
+					setTimeout(self.checkIfActive, self.pingDelay);
+				});
+			};
 
 
 			self.renderComponents = function() {
@@ -319,7 +345,7 @@
 			self.log = function(keyCode) {
 				self.registry.push(new KeyPressEvent(keyCode, self.uid));
 				console.log(self.registry.slice(-1)[0]);
-			}
+			};
 
 			self.render = function() {
 				var html = '';
@@ -338,15 +364,15 @@
 			self.getUID = function() {
 				if ( !localStorage.loggerUID ) {
 					localStorage.loggerUID = Math.random().toString().slice(2);
-				};
+				}
 				return localStorage.loggerUID;
-			}
+			};
 
 
 			self.init = function() {
 				self.uid = self.getUID;
 				self.render();
-				self.uploader = setInterval(self.upload, 5000);
+				self.checkIfActive();
 				return self;
 			};
 
@@ -354,6 +380,6 @@
 		}
 
 		$(document).ready(function() {
-			window.logger = new KeyboardLogger('.keyboard-logger');
+			window.logger = new KeyboardLogger('.keyboard-logger', 500);
 		});
 
