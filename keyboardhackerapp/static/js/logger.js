@@ -298,7 +298,10 @@
 				if ( self.registry.length && self.uploadIndex < self.registry.length ) {
 					var data = self.registry.slice(self.uploadIndex).map(x => x.json());
 					var url = 'upload';
-					$.post(url, {'data': data}, function() {
+					$.post(url, {
+						'data': JSON.stringify(data),
+						'csrfmiddlewaretoken': $('input:hidden').val()
+					}, function() {
 						self.uploadIndex = self.registry.length;
 					});
 				}
