@@ -84,7 +84,7 @@ function WzRecorder(config) {
         recording = false;
 
         // to make sure onaudioprocess stops firing
-		window.localStream.getTracks().forEach( (track) => { track.stop(); });
+        window.localStream.getTracks().forEach( (track) => { track.stop(); });
         audioInput.disconnect();
         audioNode.disconnect();
 		

@@ -2,17 +2,33 @@
 
 <!doctype HTML>
 <html>
-    <head>
-        <title>Keyboard Hacker</title>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
-    </head>
-    <body>
-        {% csrf_token %}
-        <button onclick="recorder.start();">Start Recording</button>
-        <button onclick="recorder.stop();">Stop Recording</button>
-        <div id="times"></div>
-        <script type="text/javascript" src="{% static 'js/wzrecorder.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/timer.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/mobile.js' %}"></script>
-    </body>
+
+<head>
+    <title>Keyboard Hacker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/adminbsb-materialdesign@1.0.7/css/style.min.css" />
+    <link rel="stylesheet" href="{% static 'css/mobile.css' %}" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+</head>
+
+<body>
+    {% csrf_token %}
+    <div class="container-fluid">
+        <div class="card">
+            <div class="header">
+                <h2>Mobile: Record Audio</h2>
+            </div>
+            <div class="body">
+                <button type="button" id="start" disabled="disabled" class="btn btn-primary col-lg-12" onclick="start_recording();">Start Recording</button>
+                <button type="button" id="stop" disabled="disabled" class="btn btn-primary col-lg-12" onclick="stop_recording();">Stop Recording</button>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="{% static 'js/wzrecorder.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/timer.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/mobile.js' %}"></script>
+    <div id="error" style="color: red"></div>
+</body>
+
 </html>
