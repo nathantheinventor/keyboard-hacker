@@ -266,12 +266,12 @@
 			var self = this;
 			this.keyboardID = keyboardID;
 			this.keyCode = keyCode;
-			this.timestamp = new Date() * 1;
+			this.timestamp = window.performance.now();
 			this.text = keyboardMap[keyCode];
 
 			this.toString = function() {
 				return this.keyCode + "(\"" + this.text + "\"): " + this.time;
-			}
+			};
 
 			this.json = function() {
 				return {
