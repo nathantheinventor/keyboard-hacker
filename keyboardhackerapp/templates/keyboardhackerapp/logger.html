@@ -1,30 +1,68 @@
 {% load static %}
+
+<!doctype HTML>
 <html>
-	<head>
-		<title>
-	Key Logger
-		</title>
-	</head>
-
-	<link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js' ></script>
-
-
-
-	<script src="{% static 'js/timer.js' %}"}>	</script>
-	<script src="{% static 'js/logger.js' %}"}>	</script>
-
-	<link rel="stylesheet" href="{% static 'css/logger.css' %}"} />
-
-
-	<body>
-
-		{% csrf_token %}
-
-		<div class='keyboard-logger' ></div>
-
-	</body>
-
-
-
+<head>
+    <title>Keyboard Hacker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/adminbsb-materialdesign@1.0.7/css/style.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/logger.css' %}"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+</head>
+<body>
+{% csrf_token %}
+<div class="container-fluid">
+    <div class="card">
+        <div class="header">
+            <h2>Keyboard Logger</h2>
+        </div>
+        <div class="body">
+            {% spaceless %}
+                {% for letter in book_text %}
+                    {% if letter == " " %}
+                        <div class="letter">&nbsp;</div>
+                    {% elif letter < " " %}
+                        <br/><br/>
+                    {% else %}
+                        <div class="letter">{{ letter }}</div>
+                    {% endif %}
+                {% endfor %}
+            {% endspaceless %}
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="{% static 'js/timer.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/logger.js' %}"></script>
+</body>
 </html>
+
+{#{% load static %}#}
+{#<html>#}
+{#<head>#}
+{#    <title>#}
+{#        Key Logger#}
+{#    </title>#}
+{#</head>#}
+{##}
+{#<link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">#}
+{#<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>#}
+
+
+{#<script src="{% static 'js/timer.js' %}" }></script>#}
+{#<script src="{% static 'js/logger.js' %}" }></script>#}
+{##}
+{#<link rel="stylesheet" href="{% static 'css/logger.css' %}" }/>#}
+{##}
+{##}
+{#<body>#}
+{##}
+{#{% csrf_token %}#}
+{##}
+{#<div class='keyboard-logger'></div>#}
+{##}
+{#</body>#}
+{##}
+{##}
+{#</html>#}

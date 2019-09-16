@@ -4,8 +4,11 @@ from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from keyboardhackerapp.models import RecordEvent
 
+
 def logger(req: HttpRequest) -> HttpResponse:
-    return render(req, "keyboardhackerapp/logger.html", {})
+    with open("book.txt") as f:
+        book_text = f.read()
+    return render(req, "keyboardhackerapp/logger.html", {"book_text": book_text})
 
 
 def is_active(req: HttpRequest) -> HttpResponse:
